@@ -28,6 +28,7 @@
     .dark{
       --bg:#0b1220; --surface:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --primary:#f8fafc; --border:#1f2937; --shadow:0 14px 36px rgba(0,0,0,.45);
       --bg-grad: radial-gradient(1300px 620px at 50% -240px, #0b1220 42%, #0a1130 100%);
+      
     }
 
     *{ box-sizing:border-box }
@@ -49,8 +50,8 @@
     .wrap{ width:min(1200px, 100%); margin-inline:auto; padding:14px 18px }
     .bar{ display:flex; align-items:center; justify-content:space-between; gap:16px }
     .brand{ font-weight:900; letter-spacing:.12em; font-size:22px }
-    nav a{ color:var(--muted); text-decoration:none; font-weight:700; padding:10px 12px; border-radius:12px; display:inline-block }
-    nav a.active, nav a:hover{ color:var(--primary); background:rgba(0,0,0,.04) }
+    nav a{ color:var(--muted); text-decoration:none; font-weight:700; padding:10px 12px; border-radius:12px; display:inline-block; transition: 0.3s; }
+    nav a.active, nav a:hover{ color:white; background:rgba(10, 3, 34, 0.651) }
     .cta{ display:flex; align-items:center; gap:8px }
     .switch{ display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--muted) }
     .switch input{ appearance:none; width:40px; height:24px; background:#cbd5e1; border-radius:999px; position:relative; outline:none; cursor:pointer }
@@ -160,6 +161,14 @@
     /* ensure image stays on top of mock if both visible for a moment */
     .media-wrap > img.screenshot { z-index: 2; }
     .media-wrap > .mock { z-index: 1; }
+
+    /* Dark mode — modal text colors only */
+    .dark dialog { color: var(--text); }
+    .dark dialog .muted { color: var(--muted); }
+    .dark dialog .modal-head strong { color: var(--text); }
+    .dark dialog .info { color: var(--text); }
+    .dark dialog .actions .btn { color: var(--text); }
+    .dark dialog .btn.primary { color: #fff; } /* ปุ่มหลักให้เป็นขาวอ่านง่าย */
   </style>
 </head>
 <body>
