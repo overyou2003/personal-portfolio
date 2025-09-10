@@ -28,7 +28,6 @@
     .dark{
       --bg:#0b1220; --surface:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --primary:#f8fafc; --border:#1f2937; --shadow:0 14px 36px rgba(0,0,0,.45);
       --bg-grad: radial-gradient(1300px 620px at 50% -240px, #0b1220 42%, #0a1130 100%);
-      
     }
 
     *{ box-sizing:border-box }
@@ -168,26 +167,29 @@
     .dark dialog .modal-head strong { color: var(--text); }
     .dark dialog .info { color: var(--text); }
     .dark dialog .actions .btn { color: var(--text); }
-    .dark dialog .btn.primary { color: #fff; } /* ปุ่มหลักให้เป็นขาวอ่านง่าย */
-    /* Disabled look for buttons (ใช้ได้ทั้ง a และ button) */
+    .dark dialog .btn.primary { color: #fff; }
+    /* Disabled look */
     .btn.is-disabled,
     .btn[aria-disabled="true"]{
       opacity: .45;
       cursor: not-allowed;
-      pointer-events: none;   /* กันคลิก */
+      pointer-events: none;
       filter: grayscale(30%);
     }
-
-    /* ให้ปุ่ม primary ดูหม่นลงแต่ยังอ่านออก */
     .btn.primary.is-disabled,
     .btn.primary[aria-disabled="true"]{
       opacity: .55;
     }
+    .modal-head #mTitle { font-size: 20px; }
 
-    .modal-head #mTitle {
-      font-size: 20px;
+    /* Avatar img style (คงของเดิม) */
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:inherit;
+      display:block;
     }
-
   </style>
 </head>
 <body>
@@ -195,10 +197,10 @@
     <div class="wrap bar">
       <div class="brand">LUCID.DREAM</div>
       <nav aria-label="Main">
-        <a href="#home" data-nav class="active">Home</a>
-        <a href="#projects" data-nav>Projects</a>
-        <a href="#about" data-nav>Personal info</a>
-        <a href="#contact" data-nav>Contact</a>
+        <a href="#home" data-nav class="active">หน้าหลัก</a>
+        <a href="#projects" data-nav>โปรเจกต์</a>
+        <a href="#about" data-nav>ประวัติส่วนตัว</a>
+        <a href="#contact" data-nav>ช่องทางการติดต่อ</a>
       </nav>
       <div class="cta">
         <label class="switch" title="Toggle dark mode">
@@ -217,7 +219,7 @@
         <p class="muted">Welcome to — my portfolio ✨</p>
       </div>
 
-      <!-- Quick tiles -->
+    <!-- Quick tiles -->
       <div class="tiles" id="featured">
         <a class="tile t1" href="#projects"><span class="bg"></span><span class="label">ดูโปรเจกต์ <span class="sub">(งานจริง + ฝึกทำ)</span></span></a>
         <a class="tile t2" href="#about"><span class="bg"></span><span class="label">About Me <span class="sub">เป้าหมาย & ทักษะ</span></span></a>
@@ -233,7 +235,7 @@
 
     <!-- PROJECTS -->
     <section id="projects" hidden>
-      <h2>Projects</h2>
+      <h2>โปรเจกต์</h2>
       <p class="muted">เลือกรายการด้านล่างเพื่อดูรายละเอียด</p>
       <div class="filter" id="filter"></div>
       <div class="tiles" id="project-grid"></div>
@@ -241,7 +243,7 @@
 
     <!-- ABOUT -->
     <section id="about" hidden>
-      <h2>Personal Information</h2>
+      <h2>ประวัติส่วนตัว</h2>
       <div class="about">
         <div class="avatar" id="avatar" aria-label="รูปโปรไฟล์">🧑🏻‍💻</div>
         <div>
@@ -260,10 +262,10 @@
 
     <!-- CONTACT -->
     <section id="contact" hidden>
-      <h2>Contact</h2>
+      <h2>ช่องทางการติดต่อ</h2>
       <div class="contact">
         <div class="card">
-          <h3>Reach me</h3>
+          <h3>สามารถติดต่อผมได้ที่</h3>
           <div class="list" id="reach"></div>
           <div class="actions">
             <a class="btn primary" id="cvBtn" href="#" download>Download Resume</a>
@@ -314,8 +316,8 @@
     /* ===================== CONFIG ===================== */
     const PROFILE = {
       avatarUrl: 'images/me.jpg', // เปลี่ยนเป็นพาธรูปหน้าจริงของคุณ
-      name: 'Patiphat Boonanan (Dream)',
-      title: '4th-year IT @ KMUTNB (Prachinburi) — Front-End / Full-Stack / UX/UI Intern',
+      name: 'ปฏิพัทธ์ บุญอนันต์ (ดรีม)',
+      title: 'กำลังศึกษาอยู่ที่ มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ วิทยาเขตปราจีนบุรี ชั้นปีที่ 4 คณะเทคโนโลยีและการจัดการอุตสาหกรรม สาขาเทคโนโลยีสารสนเทศ(IT) — กำลังหาที่ฝึกงานสหกิจ ตำแหน่ง Front-End / Full-Stack / UX/UI / Web Developer',
       avatarEmoji: '🧑🏻\u200d💻',
       bio: [
         'สวัสดีครับ ผม "ดรีม" (ปฏิพัทธ์) — ชอบออกแบบเว็บที่เรียบง่ายแต่มีชีวิต ชอบเก็บรายละเอียด UX ตั้งแต่โหลดหน้าไปจนถึงความรู้สึกของปุ่มคลิก ถนัด HTML/CSS/JavaScript, Node.js/SQLite และกำลังต่อยอด React; สนใจ UX/UI และ micro-animations ที่ทำให้ผู้ใช้ยิ้มได้',
@@ -327,7 +329,7 @@
       contact: {
         email: 'dreams.patiphat@gmail.com',
         phone: '097-116-0106',
-        location: 'Bangkok Minburi, TH',
+        location: 'จังหวัดกรุงเทพฯ เขตมีนบุรี, ประเทศไทย',
         website: '-anyways',
         linkedin: 'https://www.linkedin.com/in/patiphat/',
         github: 'https://github.com/overyou2003',
@@ -336,8 +338,7 @@
     };
     const cvBtn = document.getElementById('cvBtn');
     cvBtn.href = PROFILE.contact.cv || '#';
-    cvBtn.setAttribute('download', 'Patiphat_Boonanan_Resume.pdf'); // ตั้งชื่อไฟล์ตอนโหลด
-
+    cvBtn.setAttribute('download', 'Patiphat_Boonanan_Resume.pdf');
 
     const PROJECTS = [
       {
@@ -433,7 +434,28 @@
     // ABOUT
     document.getElementById('name').textContent = PROFILE.name;
     document.getElementById('tagline').textContent = PROFILE.title;
-    const av = document.getElementById('avatar'); av.textContent = PROFILE.avatarEmoji || '👤';
+
+    // AVATAR — render เป็น <img> ทีเดียวพร้อม fallback ไม่กระพริบ
+    (() => {
+      const av = document.getElementById('avatar');
+      const img = document.createElement('img');
+
+      // ใช้พาธจากโปรไฟล์ หรือ images/me.jpg และเติมเวอร์ชันกันแคช
+      const src = (PROFILE.avatarUrl || 'images/me.jpg') + '?v=1';
+
+      img.src = src;
+      img.alt = PROFILE.name || 'Profile photo';
+      img.loading = 'eager';
+      img.decoding = 'sync';
+
+      // ถ้าโหลดรูปไม่ได้ ค่อย fallback เป็นอีโมจิ
+      img.onerror = () => { av.textContent = PROFILE.avatarEmoji || '👤'; };
+
+      // ใส่รูปลง DOM ทีเดียว (ไม่รอ onload) ลดอาการแว้บและไม่ให้มีโค้ดอื่นมาเขียนทับ
+      av.textContent = '';
+      av.appendChild(img);
+    })();
+
     const chips = document.getElementById('chips');
     PROFILE.chips.forEach(c=> chips.append(Object.assign(document.createElement('span'),{className:'chip',textContent:c})));
     const bio = document.getElementById('bio');
@@ -444,9 +466,9 @@
     // Contact
     const reach = document.getElementById('reach');
     const links = [
-      ['Email', `mailto:${PROFILE.contact.email}`, PROFILE.contact.email],
-      ['Tel', `tel:${PROFILE.contact.phone.replace(/[^\d+]/g,'')}`, PROFILE.contact.phone],
-      ['Address', '#', PROFILE.contact.location],
+      ['อีเมล', `mailto:${PROFILE.contact.email}`, PROFILE.contact.email],
+      ['โทร', `tel:${PROFILE.contact.phone.replace(/[^\d+]/g,'')}`, PROFILE.contact.phone],
+      ['ที่อยู่', '#', PROFILE.contact.location],
       ['Line', PROFILE.contact.website, PROFILE.contact.website],
     ];
     links.forEach(([k,href,val])=>{
@@ -512,51 +534,43 @@
     }
     render();
 
-    // --- helpers: พรีโหลดและคืน path ที่ใช้ได้ตัวแรก (ลอง ./, / และนามสกุลยอดนิยม) ---
-    // --- helpers: พรีโหลดและคืน path ที่ใช้ได้ตัวแรก (ลอง ./, /, ../, ../../ และนามสกุลยอดนิยม) ---
-    // ลองหลายพาธและนามสกุลยอดนิยม
+    // --- helpers: preload + try candidates ---
     function _candidateSources(src){
-    if (/^https?:\/\//i.test(src)) return [src]; // URL ตรง
-
-    const hasExt = /\.\w+$/.test(src);
-    const base = hasExt ? src.slice(0, src.lastIndexOf('.')) : src;
-    const ext  = hasExt ? src.slice(src.lastIndexOf('.')) : '';
-    const exts = hasExt ? [ext, ext.toUpperCase()]
-                        : ['.png','.PNG','.jpg','.JPG','.jpeg','.JPEG','.webp','.WEBP'];
-
-    // เผื่อกรณี HTML อยู่ในโฟลเดอร์ย่อย หรือ host ใต้ subpath (เช่น GitHub Pages)
-    const prefixes = ['', './', '/', '../', '../../'];
-
-    const out = [];
-    for (const pre of prefixes){
+      if (/^https?:\/\//i.test(src)) return [src];
+      const hasExt = /\.\w+$/.test(src);
+      const base = hasExt ? src.slice(0, src.lastIndexOf('.')) : src;
+      const ext  = hasExt ? src.slice(src.lastIndexOf('.')) : '';
+      const exts = hasExt ? [ext, ext.toUpperCase()]
+                          : ['.png','.PNG','.jpg','.JPG','.jpeg','.JPEG','.webp','.WEBP'];
+      const prefixes = ['', './', '/', '../', '../../'];
+      const out = [];
+      for (const pre of prefixes){
         for (const e of exts){
-        const name = hasExt ? base + e : src + e;
-        out.push(pre + name);
+          const name = hasExt ? base + e : src + e;
+          out.push(pre + name);
         }
-    }
-    return [...new Set(out)];
+      }
+      return [...new Set(out)];
     }
 
-    // พรีโหลด + log ให้เห็นพาธที่ลอง
     function preloadFirstWorking(src, cb){
-    const list = _candidateSources(src);
-    let i = 0;
-    const tryOne = () => {
+      const list = _candidateSources(src);
+      let i = 0;
+      const tryOne = () => {
         if (i >= list.length) {
-        console.warn('⛔️ รูปไม่พบจากทุกพาธที่ลอง:', src, list);
-        return cb(null);
+          console.warn('⛔️ รูปไม่พบจากทุกพาธที่ลอง:', src, list);
+          return cb(null);
         }
         const url = list[i];
         const img = new Image();
         img.onload  = () => { console.info('✅ ใช้พาธนี้ได้:', url); cb(url); };
         img.onerror = () => { console.warn('❌ ไม่พบรูป:', url); i++; tryOne(); };
         img.src = url;
-    };
-    tryOne();
-}
+      };
+      tryOne();
+    }
 
-
-    // ====== openProject (เหมือนเดิม แต่พรีโหลดรูปและสลับ mock ให้อัตโนมัติ) ======
+    // ====== openProject ======
     function openProject(p){
       // ข้อมูลหลัก
       mTitle.textContent = p.title || '';
@@ -573,7 +587,6 @@
 
       // ลิงก์ (ทำสถานะ disable แทนการซ่อน)
       function setBtnState(el, url){
-        // reset ก่อน
         el.removeAttribute('href');
         el.target = '';
         el.rel = '';
@@ -597,11 +610,8 @@
       setBtnState(mLive, p.live);
       setBtnState(mCode, p.code);
 
-// คอนเทนเนอร์ปุ่มให้โชว์ไว้เสมอ (ไม่ต้องซ่อน)
-const actions = mLive.closest('.actions');
-if (actions) actions.hidden = false;
-
-
+      const actions = mLive.closest('.actions');
+      if (actions) actions.hidden = false;
 
       // รูป
       const shot = p.shot || p.screenshot || p.thumb;
