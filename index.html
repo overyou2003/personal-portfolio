@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DREAMS — Portfolio</title>
-  <meta name="description" content="Portfolio — Front-End / Full-Stack Intern. โชว์โปรเจกต์, เรซูเม่, และช่องทางติดต่อ ในสไตล์ Neal.fun"/>
+  <meta name="description" content="Portfolio — Front-End / Full-Stack Intern. โชว์โปรเจกต์, เรซูเม่, และช่องทางติดต่อ"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -183,7 +183,7 @@
     <!-- HERO -->
     <section id="home">
       <div class="hero">
-        <h1>A tiny portfolio on the internet</h1>
+        <h1>A tiny portfolio for my project</h1>
         <p class="muted">Welcome to — my portfolio ✨</p>
       </div>
 
@@ -195,7 +195,7 @@
         <a class="tile t4" href="#projects"><span class="bg"></span><span class="label">Memory Card Game <span class="sub">HTML / CSS / JS</span></span></a>
         <a class="tile t5" href="#projects"><span class="bg"></span><span class="label">Debate App <span class="sub">Front-End + Node/SQLite</span></span></a>
         <a class="tile t6" href="#projects"><span class="bg"></span><span class="label">To-Do & UI Lab <span class="sub">Components Playground</span></span></a>
-        <a class="tile t7" href="#projects"><span class="bg"></span><span class="label">Gacha/Photobooth <span class="sub">Spark Joy Experiments</span></span></a>
+        <a class="tile t7" href="#projects"><span class="bg"></span><span class="label">The Dreams/UX-UI Design <span class="sub">Figma</span></span></a>
         <a class="tile t8" href="#about"><span class="bg"></span><span class="label">Internship <span class="sub">Front-End / Full-Stack</span></span></a>
         <a class="tile t9" href="#contact"><span class="bg"></span><span class="label">Resume <span class="sub">ดาวน์โหลด PDF</span></span></a>
       </div>
@@ -204,7 +204,7 @@
     <!-- PROJECTS -->
     <section id="projects" hidden>
       <h2>Projects</h2>
-      <p class="muted">เลือกรายการด้านล่างเพื่อดูรายละเอียด ตัวอย่างนี้ดึงจากอาร์เรย์ <code>PROJECTS</code> — แก้ไขได้ง่าย</p>
+      <p class="muted">เลือกรายการด้านล่างเพื่อดูรายละเอียด</p>
       <div class="filter" id="filter"></div>
       <div class="tiles" id="project-grid"></div>
     </section>
@@ -244,14 +244,14 @@
         <div class="card">
           <h3>สถานะฝึกงาน</h3>
           <p id="intern"></p>
-          <p class="muted">ถ้าตารางเวลา/พื้นที่เหมาะสม ติดต่อมาได้เลย 🙌</p>
+          <p class="muted">ถ้าตำแหน่ง/เวลาเริ่มฝึก/สถานที่ตั้งเหมาะสม สามารถติดต่อมาได้เลยครับ 🙌</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap">© <span id="year"></span> Dream — Built with ♥ in a Neal.fun vibe.</div>
+    <div class="wrap">© <span id="year"></span> Dream — Built for my portfolio</div>
   </footer>
 
   <!-- MODAL -->
@@ -292,17 +292,21 @@
       internship: 'สนใจฝึกงานตำแหน่ง Front-End / Full-Stack | เริ่มฝึกงานวันที่ 3 พ.ย. 2025 – 27 ก.พ. 2026 (4 เดือน) | กรุงเทพฯ และปริมณฑล',
       chips: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'Node.js', 'SQLite'],
       skills: ['React (เบื้องต้น)', 'Tailwind', 'Vanilla JS', 'Git & GitHub', 'REST API Basics', 'Responsive Design'],
-      interests: ['Photobooth & Gacha UX', 'Minimal / Gen-Z Aesthetics', 'Interactive Web', 'Micro-animations'],
+      interests: ['Technology', 'AI', 'Interactive Web', 'UX/UI Design'],
       contact: {
         email: 'dreams.patiphat@gmail.com',
         phone: '097-116-0106',
         location: 'Bangkok Minburi, TH',
-        website: 'https://github.com/overyou2003',
-        linkedin: 'https://www.linkedin.com/',
+        website: '-anyways',
+        linkedin: 'https://www.linkedin.com/in/patiphat/',
         github: 'https://github.com/overyou2003',
-        cv: '#',
+        cv: 'files/Resume-f.pdf',
       }
     };
+    const cvBtn = document.getElementById('cvBtn');
+    cvBtn.href = PROFILE.contact.cv || '#';
+    cvBtn.setAttribute('download', 'Patiphat_Boonanan_Resume.pdf'); // ตั้งชื่อไฟล์ตอนโหลด
+
 
     const PROJECTS = [
       {
@@ -312,13 +316,15 @@
         thumb: 'images/memory_card_game.png',
         shot:  'images/memory_card_game.png',
         description: 'เกมจับคู่การ์ดพร้อมแอนิเมชัน เขียนด้วย Vanilla JS รองรับระดับความยาก และมีโมดัลสรุปคะแนน',
-        code: 'https://github.com/overyou2003',
+        code: 'https://github.com/overyou2003/miniProject-MemoryCardGame.git',
         live: 'https://mini-project-memory-card-game.vercel.app/',
       },
       {
         title: 'Debate App — Front-End',
-        subtitle: 'Vite / React (หรือ Vanilla) UI',
+        subtitle: 'HTML / CSS / JS',
         tags: ['SPA', 'Routing', 'State'],
+        thumb: 'images/debate_front.png',
+        shot:  'images/debate_front.png',
         description: 'ส่วนติดต่อผู้ใช้สำหรับแอปถกเถียง มีระบบห้อง โพสต์ และคะแนนโหวต',
         code: 'https://github.com/overyou2003/Debate_FrontEnd',
         live: '#',
@@ -327,32 +333,40 @@
         title: 'Debate API — Back-End',
         subtitle: 'Node.js + SQLite',
         tags: ['API', 'Auth (basic)', 'DB'],
+        thumb: 'images/debate_back.png',
+        shot:  'images/debate_back.png',
         description: 'แบ็กเอนด์ API สำหรับแอป Debate: จัดการผู้ใช้ โพสต์ และคอมเมนต์ด้วย SQLite',
         code: 'https://github.com/overyou2003/Debate_BackEnd',
         live: '#',
       },
       {
         title: 'To-Do & UI Components',
-        subtitle: 'Vanilla Components',
+        subtitle: 'HTML / CSS / JS',
         tags: ['Components', 'Accessibility'],
+        thumb: 'images/todo.png',
+        shot:  'images/todo.png',
         description: 'ลิสต์งาน + คอลเลกชันคอมโพเนนต์ UI (Modal, Tabs, Tooltip) ที่เขียนเอง',
-        code: 'https://github.com/overyou2003',
-        live: '#',
+        code: 'https://github.com/overyou2003/miniProject-ToDoList.git',
+        live: 'https://mini-project-to-do-list-five.vercel.app/',
       },
       {
-        title: 'Lumera — Spark Joy Mock',
-        subtitle: 'Gacha / Photobooth',
+        title: 'The Dreams — UX/UI Design',
+        subtitle: 'Figma',
         tags: ['Brand', 'Motion', 'Marketing'],
-        description: 'เพลย์กราวด์แนว Photobooth + กาชาปอง ใช้เสริมคอนเทนต์ Art Space',
-        code: 'https://github.com/overyou2003',
-        live: '#',
+        thumb: 'images/thedreams.png',
+        shot:  'images/thedreams.png',
+        description: 'UX / UI Design สำหรับเว็บซื้อขายบัตรคอนเสริตออนไลน์',
+        code: '#',
+        live: 'https://www.figma.com/proto/XqiCy8Xg7Vc6NfEfNNgSMB/6506021620032?node-id=7-17&starting-point-node-id=7%3A17',
       },
       {
-        title: 'CSS Micro-animations',
-        subtitle: 'Hover & Ripple',
+        title: 'Java learning — Mobile Application',
+        subtitle: 'Java / Android Studio',
         tags: ['CSS', 'Performance'],
-        description: 'รวมเทคนิค hover, ripple, และ transition ที่เรียบง่ายแต่ดูแพง',
-        code: 'https://github.com/overyou2003',
+        thumb: 'images/javaapp.png',
+        shot:  'images/javaapp.png',
+        description: 'แอปพลิเคชั่น Android เป็นสื่อการสอนภาษา Java และมีเกมส์ให้เล่นเพื่อเก็บความคืบหน้าในการเรียน',
+        code: 'https://github.com/overyou2003/ProjectAndroid.git',
         live: '#',
       },
     ];
@@ -402,7 +416,7 @@
       ['Email', `mailto:${PROFILE.contact.email}`, PROFILE.contact.email],
       ['Tel', `tel:${PROFILE.contact.phone.replace(/[^\d+]/g,'')}`, PROFILE.contact.phone],
       ['Address', '#', PROFILE.contact.location],
-      ['Github', PROFILE.contact.website, PROFILE.contact.website],
+      ['Line', PROFILE.contact.website, PROFILE.contact.website],
     ];
     links.forEach(([k,href,val])=>{
       const row = document.createElement('div'); row.className='chip';
