@@ -4,23 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DREAMS — Portfolio</title>
-  <meta name="description" content="Portfolio ของ Pleng — Front‑End / Full‑Stack Intern. โชว์โปรเจกต์, เรซูเม่, และช่องทางติดต่อ ในสไตล์ Neal.fun"/>
+  <meta name="description" content="Portfolio — Front-End / Full-Stack Intern. โชว์โปรเจกต์, เรซูเม่, และช่องทางติดต่อ ในสไตล์ Neal.fun"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-    *{
-        
-    }
+  <style>
     :root{
-      /* Theme (light by default) */
+      /* Theme (light) */
       --bg: #f6f7fb;
       --surface: #ffffff;
       --text: #0f172a;
       --muted:#64748b;
-      --primary: #111827; /* heading สีเข้มคล้าย Neal */
+      --primary: #111827;
       --accent: #2563eb;
       --border: #e5e7eb;
       --shadow: 0 14px 36px rgba(0,0,0,.10);
@@ -31,9 +27,9 @@
       --bg:#0b1220; --surface:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --primary:#f8fafc; --border:#1f2937; --shadow:0 14px 36px rgba(0,0,0,.45);
       --bg-grad: radial-gradient(1300px 620px at 50% -240px, #0b1220 42%, #0a1130 100%);
     }
-    
+
     *{ box-sizing:border-box }
-    html,body{
+    body{
       margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, Noto Sans;
       background: var(--bg-grad);
       background-color: var(--bg);
@@ -41,17 +37,12 @@
       min-height:100dvh;
       display:flex; flex-direction:column;
     }
-    body{
-      margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, Noto Sans;
-      background: radial-gradient(1300px 620px at 50% -240px, #fff 42%, #eef2ff 100%);
-      color:var(--text);
-      min-height:100dvh;
-      display:flex; flex-direction:column;
-    }
+
+    /* HEADER */
     header.site{
       position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(6px);
       background: color-mix(in oklab, var(--surface) 60%, transparent);
-      border-bottom:1px solid var(--border); 
+      border-bottom:1px solid var(--border);
     }
     .wrap{ width:min(1200px, 100%); margin-inline:auto; padding:14px 18px }
     .bar{ display:flex; align-items:center; justify-content:space-between; gap:16px }
@@ -70,7 +61,7 @@
     .hero h1{ margin:0; font-size:clamp(36px, 6vw, 56px); font-weight:900; letter-spacing:.08em }
     .hero p{ color:var(--muted); margin:8px 0 0 }
 
-    /* TILES (Neal.fun style) */
+    /* TILES */
     .tiles{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:26px }
     @media (max-width: 900px){ .tiles{ grid-template-columns:repeat(2,1fr) } }
     @media (max-width: 560px){ .tiles{ grid-template-columns:1fr } }
@@ -98,17 +89,6 @@
     .filter button{ border:1px solid var(--border); background:var(--surface); padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:700; color:var(--muted) }
     .filter button.active, .filter button:hover{ color:var(--primary); background:rgba(0,0,0,.04) }
 
-    /* Project modal */
-    dialog{ width:min(900px,96vw); border:none; border-radius:20px; padding:0; overflow:hidden; box-shadow:var(--shadow); background:var(--surface) }
-    dialog::backdrop{ background:rgba(2,6,23,.55) }
-    .modal-head{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border) }
-    .modal-body{ padding:18px; display:grid; grid-template-columns: 1.1fr 1fr; gap:16px }
-    @media (max-width: 720px){ .modal-body{ grid-template-columns:1fr } }
-    .mock{ border:1px dashed var(--border); border-radius:14px; aspect-ratio:16/10; display:grid; place-items:center; background:repeating-linear-gradient(45deg,#f1f5f9, #f1f5f9 10px, #e2e8f0 10px, #e2e8f0 20px) }
-    .actions{ display:flex; gap:10px; flex-wrap:wrap }
-    .btn{ border:1px solid var(--border); background:var(--surface); padding:10px 14px; border-radius:12px; text-decoration:none; color:inherit; font-weight:700 }
-    .btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff }
-
     /* CONTACT */
     .contact{ display:grid; grid-template-columns:1fr 1fr; gap:18px }
     @media (max-width:720px){ .contact{ grid-template-columns:1fr } }
@@ -118,7 +98,7 @@
 
     footer{ margin-top:auto; border-top:1px solid var(--border); padding:18px 0; color:var(--muted) }
 
-    /* Fancy backgrounds for the first 9 tiles to match Neal vibe */
+    /* Fancy backgrounds for tiles */
     .t1 .bg{ background: radial-gradient(70px 20px at 16% 76%, #e7d9bd 0 95%, transparent 95%), radial-gradient(180px 40px at 84% 22%, #e7d9bd 0 95%, transparent 95%), linear-gradient(#f6ead2, #fbf7ef) }
     .t2{ color:#f9fafb; } .t2 .bg{ background:radial-gradient(260px 260px at 54% 52%, rgba(28,188,80,.95) 0 34%, transparent 35%), radial-gradient(260px 260px at 52% 52%, #0000 0 36%, rgba(255,184,0,.9) 36% 39%, #0000 40%), repeating-linear-gradient(120deg, #1c1c1c 0 14px, #111 14px 28px) }
     .t3 .bg{ background: radial-gradient(80px 80px at 22% 38%, #9ad0ff 0 72%, transparent 73%), radial-gradient(40px 40px at 30% 46%, #2d9fff 0 72%, transparent 73%), radial-gradient(20px 20px at 72% 28%, #ff6a3d 0 70%, transparent 71%), linear-gradient(#ffffff, #eaf2ff) }
@@ -128,6 +108,52 @@
     .t7{ color:#fff } .t7 .bg{ background: linear-gradient(#0e1320,#111827) }
     .t8 .bg{ background: radial-gradient(18px 18px at 30% 35%, #9cc7ff 0 70%, transparent 71%), radial-gradient(18px 18px at 40% 55%, #c6ddff 0 70%, transparent 71%), radial-gradient(18px 18px at 58% 42%, #c6ddff 0 70%, transparent 71%), linear-gradient(#ffffff,#eef6ff) }
     .t9{ color:#fffbeb } .t9 .bg{ background: repeating-linear-gradient(0deg, transparent 0 14px, rgba(255,255,255,.06) 14px 28px), linear-gradient(#1a2f85,#0b1e66) }
+
+    /* Card with image (thumb) */
+    .tile.hasImg { color:#fff; }
+    .tile .thumb{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.02); }
+    .tile.hasImg::after{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.06)); }
+    .tile.hasImg .label{ position:relative; z-index:2; text-shadow:0 2px 12px rgba(0,0,0,.5); }
+
+    /* MODAL (2 columns with media overlay) */
+    dialog{ width:min(900px,96vw); border:none; border-radius:20px; padding:0; overflow:hidden; box-shadow:var(--shadow); background:var(--surface) }
+    dialog::backdrop{ background:rgba(2,6,23,.55) }
+    .modal-head{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border) }
+
+    .modal-body{
+      padding:18px;
+      display:grid;
+      grid-template-columns: minmax(0,1.15fr) minmax(0,1fr);
+      grid-template-areas: "media info";
+      gap:16px; align-items:start;
+    }
+    .media-wrap{ grid-area:media; position:relative; border-radius:14px; overflow:hidden; min-height:260px; }
+    .media-wrap > *{ position:absolute; inset:0; width:100%; height:100%; border-radius:14px; }
+    .screenshot{ object-fit:cover; border:1px solid var(--border); background:#0001; }
+    .mock{ display:grid; place-items:center; border:1px dashed var(--border); background:repeating-linear-gradient(45deg,#f1f5f9,#f1f5f9 10px,#e2e8f0 10px,#e2e8f0 20px); }
+    .info{ grid-area:info; min-width:0; }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap }
+
+    @media (max-width:720px){
+      .modal-body{ grid-template-columns:1fr; grid-template-areas:"media" "info"; }
+      .media-wrap{ min-height:200px; }
+    }
+
+    /* ==== Buttons ==== */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 14px;
+      font-weight:700; text-decoration:none; line-height:1;
+      border:1px solid var(--border); border-radius:12px;
+      background:var(--surface); color:inherit; cursor:pointer;
+      transition: background .2s ease, box-shadow .2s ease, transform .06s ease;
+    }
+    .btn:hover{ background:rgba(0,0,0,.04) }
+    .btn:active{ transform:translateY(1px) }
+    .btn:focus-visible{ outline:3px solid color-mix(in oklab, var(--accent) 55%, transparent); outline-offset:2px }
+    .btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
+    .btn.primary:hover{ filter:brightness(.96) }
+    button.btn{ font:inherit; color:inherit; background:inherit }
   </style>
 </head>
 <body>
@@ -156,45 +182,18 @@
         <h1>A tiny portfolio on the internet</h1>
         <p class="muted">สไตล์คล้าย Neal.fun — แต่เป็นพื้นที่ของฉัน ✨</p>
       </div>
-      
-      <!-- Quick tiles to key sections / featured works -->
+
+      <!-- Quick tiles -->
       <div class="tiles" id="featured">
-        <a class="tile t1" href="#projects" aria-label="ดูโปรเจกต์ทั้งหมด">
-          <span class="bg" aria-hidden="true"></span>
-          <span class="label">ดูโปรเจกต์ <span class="sub">(งานจริง + ฝึกทำ)</span></span>
-        </a>
-        <a class="tile t2" href="#about" aria-label="อ่านประวัติและเป้าหมาย">
-          <span class="bg" aria-hidden="true"></span>
-          <span class="label">About Me <span class="sub">เป้าหมาย & ทักษะ</span></span>
-        </a>
-        <a class="tile t3" href="#contact" aria-label="ช่องทางติดต่อ">
-          <span class="bg" aria-hidden="true"></span>
-          <span class="label">Contact <span class="sub">อีเมล / โทร / ลิงก์</span></span>
-        </a>
-        <a class="tile t4" href="#projects" aria-label="Memory Card Game">
-          <span class="bg"></span>
-          <span class="label">Memory Card Game <span class="sub">HTML / CSS / JS</span></span>
-        </a>
-        <a class="tile t5" href="#projects" aria-label="Debate App (FE/BE)">
-          <span class="bg"></span>
-          <span class="label">Debate App <span class="sub">Front‑End + Node/SQLite</span></span>
-        </a>
-        <a class="tile t6" href="#projects" aria-label="To‑Do & UI Components">
-          <span class="bg"></span>
-          <span class="label">To‑Do & UI Lab <span class="sub">Components Playground</span></span>
-        </a>
-        <a class="tile t7" href="#projects" aria-label="Gacha / Photobooth Idea">
-          <span class="bg"></span>
-          <span class="label">Gacha/Photobooth <span class="sub">Spark Joy Experiments</span></span>
-        </a>
-        <a class="tile t8" href="#about" aria-label="ตำแหน่งฝึกงานที่ต้องการ">
-          <span class="bg"></span>
-          <span class="label">Internship <span class="sub">Front‑End / Full‑Stack</span></span>
-        </a>
-        <a class="tile t9" href="#contact" aria-label="Resume & Download">
-          <span class="bg"></span>
-          <span class="label">Resume <span class="sub">ดาวน์โหลด PDF</span></span>
-        </a>
+        <a class="tile t1" href="#projects"><span class="bg"></span><span class="label">ดูโปรเจกต์ <span class="sub">(งานจริง + ฝึกทำ)</span></span></a>
+        <a class="tile t2" href="#about"><span class="bg"></span><span class="label">About Me <span class="sub">เป้าหมาย & ทักษะ</span></span></a>
+        <a class="tile t3" href="#contact"><span class="bg"></span><span class="label">Contact <span class="sub">อีเมล / โทร / ลิงก์</span></span></a>
+        <a class="tile t4" href="#projects"><span class="bg"></span><span class="label">Memory Card Game <span class="sub">HTML / CSS / JS</span></span></a>
+        <a class="tile t5" href="#projects"><span class="bg"></span><span class="label">Debate App <span class="sub">Front-End + Node/SQLite</span></span></a>
+        <a class="tile t6" href="#projects"><span class="bg"></span><span class="label">To-Do & UI Lab <span class="sub">Components Playground</span></span></a>
+        <a class="tile t7" href="#projects"><span class="bg"></span><span class="label">Gacha/Photobooth <span class="sub">Spark Joy Experiments</span></span></a>
+        <a class="tile t8" href="#about"><span class="bg"></span><span class="label">Internship <span class="sub">Front-End / Full-Stack</span></span></a>
+        <a class="tile t9" href="#contact"><span class="bg"></span><span class="label">Resume <span class="sub">ดาวน์โหลด PDF</span></span></a>
       </div>
     </section>
 
@@ -208,11 +207,11 @@
 
     <!-- ABOUT -->
     <section id="about" hidden>
-      <h2>ประวัติส่วนตัว</h2>
+      <h2>Personal Information</h2>
       <div class="about">
         <div class="avatar" id="avatar" aria-label="รูปโปรไฟล์">🧑🏻‍💻</div>
         <div>
-          <h3 id="name">ชื่อ‑นามสกุล</h3>
+          <h3 id="name">ชื่อ-นามสกุล</h3>
           <p id="tagline" class="muted">ตำแหน่ง/สเตตัส</p>
           <div class="stack" id="chips"></div>
           <hr style="border:none;border-top:1px solid var(--border); margin:14px 0">
@@ -227,13 +226,13 @@
 
     <!-- CONTACT -->
     <section id="contact" hidden>
-      <h2>ติดต่อ</h2>
+      <h2>Contact</h2>
       <div class="contact">
         <div class="card">
           <h3>Reach me</h3>
           <div class="list" id="reach"></div>
           <div class="actions">
-            <a class="btn primary" id="cvBtn" href="#" download>ดาวน์โหลด CV</a>
+            <a class="btn primary" id="cvBtn" href="#" download>Download Resume</a>
             <a class="btn" id="githubBtn" href="#" target="_blank" rel="noopener">GitHub</a>
             <a class="btn" id="linkedinBtn" href="#" target="_blank" rel="noopener">LinkedIn</a>
           </div>
@@ -257,33 +256,40 @@
       <strong id="mTitle">Project</strong>
       <button class="btn" id="mClose">ปิด</button>
     </div>
+
     <div class="modal-body">
-      <div class="mock" id="mMock">ภาพตัวอย่าง/สกรีนช็อต</div>
-      <div>
+      <!-- ซ้าย -->
+      <div class="media-wrap" id="mediaWrap">
+        <img id="mImg" class="screenshot" alt="" hidden>
+        <div class="mock" id="mMock">ภาพตัวอย่าง/สกรีนช็อต</div>
+      </div>
+
+      <!-- ขวา -->
+      <div class="info">
         <p id="mDesc" class="muted"></p>
         <div class="stack" id="mTags"></div>
         <div class="actions" style="margin-top:14px">
-          <a class="btn primary" id="mLive" href="#" target="_blank" rel="noopener">ดูเดโม</a>
-          <a class="btn" id="mCode" href="#" target="_blank" rel="noopener">ดูโค้ด</a>
+          <a class="btn primary" id="mLive" target="_blank" rel="noopener">ดูเดโม</a>
+          <a class="btn" id="mCode"  target="_blank" rel="noopener">ดูโค้ด</a>
         </div>
       </div>
     </div>
   </dialog>
 
   <script>
-    /* ===================== CONFIG (แก้ไขได้) ===================== */
+    /* ===================== CONFIG ===================== */
     const PROFILE = {
       name: 'Patiphat Boonanan (Dream)',
-      title: '4th-year IT @ KMUTNB (Prachinburi) — Front‑End / Full‑Stack Intern',
+      title: '4th-year IT @ KMUTNB (Prachinburi) — Front-End / Full-Stack Intern',
       avatarEmoji: '🧑🏻\u200d💻',
       bio: [
         'ชอบทำเว็บที่ใช้ง่าย ดูสะอาด มีลูกเล่นเล็ก ๆ ที่ให้ความสุขแบบ *Spark Joy*',
-        'กำลังสร้างแบรนด์ **Lumera** (Art Space & Photobooth vibes) และฝึกทำโปรเจกต์สาย Front‑End/Full‑Stack เพื่อยื่นฝึกงาน.'
+        'กำลังสร้างแบรนด์ **Lumera** (Art Space & Photobooth vibes) และฝึกทำโปรเจกต์สาย Front-End/Full-Stack เพื่อยื่นฝึกงาน.'
       ],
-      internship: 'สนใจฝึกงานตำแหน่ง Front‑End / Full‑Stack | พ.ย. 2025 – ก.พ. 2026 | กรุงเทพฯ และปริมณฑล',
+      internship: 'สนใจฝึกงานตำแหน่ง Front-End / Full-Stack | พ.ย. 2025 – ก.พ. 2026 | กรุงเทพฯ และปริมณฑล',
       chips: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'Node.js', 'SQLite'],
       skills: ['React (เบื้องต้น)', 'Tailwind', 'Vanilla JS', 'Git & GitHub', 'REST API Basics', 'Responsive Design'],
-      interests: ['Photobooth & Gacha UX', 'Minimal / Gen‑Z Aesthetics', 'Interactive Web', 'Micro‑animations'],
+      interests: ['Photobooth & Gacha UX', 'Minimal / Gen-Z Aesthetics', 'Interactive Web', 'Micro-animations'],
       contact: {
         email: 'dreams.patiphat@gmail.com',
         phone: '097-116-0106',
@@ -291,7 +297,7 @@
         website: 'https://github.com/overyou2003',
         linkedin: 'https://www.linkedin.com/',
         github: 'https://github.com/overyou2003',
-        cv: '#', // ใส่ลิงก์ไฟล์ PDF ได้
+        cv: '#',
       }
     };
 
@@ -299,34 +305,32 @@
       {
         title: 'Memory Card Game',
         subtitle: 'HTML / CSS / JS',
-        classes: 't4',
         tags: ['Game', 'DOM', 'Animation'],
+        thumb: 'images/memory_card_game.png',
+        shot:  'images/memory_card_game.png',
         description: 'เกมจับคู่การ์ดพร้อมแอนิเมชัน เขียนด้วย Vanilla JS รองรับระดับความยาก และมีโมดัลสรุปคะแนน',
         code: 'https://github.com/overyou2003',
         live: '#',
       },
       {
-        title: 'Debate App — Front‑End',
+        title: 'Debate App — Front-End',
         subtitle: 'Vite / React (หรือ Vanilla) UI',
-        classes: 't5',
         tags: ['SPA', 'Routing', 'State'],
         description: 'ส่วนติดต่อผู้ใช้สำหรับแอปถกเถียง มีระบบห้อง โพสต์ และคะแนนโหวต',
         code: 'https://github.com/overyou2003/Debate_FrontEnd',
         live: '#',
       },
       {
-        title: 'Debate API — Back‑End',
+        title: 'Debate API — Back-End',
         subtitle: 'Node.js + SQLite',
-        classes: 't3',
         tags: ['API', 'Auth (basic)', 'DB'],
         description: 'แบ็กเอนด์ API สำหรับแอป Debate: จัดการผู้ใช้ โพสต์ และคอมเมนต์ด้วย SQLite',
         code: 'https://github.com/overyou2003/Debate_BackEnd',
         live: '#',
       },
       {
-        title: 'To‑Do & UI Components',
+        title: 'To-Do & UI Components',
         subtitle: 'Vanilla Components',
-        classes: 't6',
         tags: ['Components', 'Accessibility'],
         description: 'ลิสต์งาน + คอลเลกชันคอมโพเนนต์ UI (Modal, Tabs, Tooltip) ที่เขียนเอง',
         code: 'https://github.com/overyou2003',
@@ -335,16 +339,14 @@
       {
         title: 'Lumera — Spark Joy Mock',
         subtitle: 'Gacha / Photobooth',
-        classes: 't7',
         tags: ['Brand', 'Motion', 'Marketing'],
         description: 'เพลย์กราวด์แนว Photobooth + กาชาปอง ใช้เสริมคอนเทนต์ Art Space',
         code: 'https://github.com/overyou2003',
         live: '#',
       },
       {
-        title: 'CSS Micro‑animations',
+        title: 'CSS Micro-animations',
         subtitle: 'Hover & Ripple',
-        classes: 't2',
         tags: ['CSS', 'Performance'],
         description: 'รวมเทคนิค hover, ripple, และ transition ที่เรียบง่ายแต่ดูแพง',
         code: 'https://github.com/overyou2003',
@@ -380,12 +382,12 @@
     applyMode();
     mode.addEventListener('change', applyMode);
 
-    // Fill ABOUT
+    // ABOUT
     document.getElementById('name').textContent = PROFILE.name;
     document.getElementById('tagline').textContent = PROFILE.title;
     const av = document.getElementById('avatar'); av.textContent = PROFILE.avatarEmoji || '👤';
     const chips = document.getElementById('chips');
-    PROFILE.chips.forEach(c=>{ const el = Object.assign(document.createElement('span'),{className:'chip',textContent:c}); chips.append(el); });
+    PROFILE.chips.forEach(c=> chips.append(Object.assign(document.createElement('span'),{className:'chip',textContent:c})));
     const bio = document.getElementById('bio');
     PROFILE.bio.forEach(line=>{ const p = document.createElement('p'); p.innerHTML = line; bio.append(p); });
     const skills = document.getElementById('skills'); PROFILE.skills.forEach(s=> skills.append(Object.assign(document.createElement('span'),{className:'chip',textContent:s})));
@@ -394,10 +396,10 @@
     // Contact
     const reach = document.getElementById('reach');
     const links = [
-      ['อีเมล', `mailto:${PROFILE.contact.email}`, PROFILE.contact.email],
-      ['โทร', `tel:${PROFILE.contact.phone.replace(/[^\d+]/g,'')}`, PROFILE.contact.phone],
-      ['ที่อยู่', '#', PROFILE.contact.location],
-      ['เว็บไซต์', PROFILE.contact.website, PROFILE.contact.website],
+      ['Email', `mailto:${PROFILE.contact.email}`, PROFILE.contact.email],
+      ['Tel', `tel:${PROFILE.contact.phone.replace(/[^\d+]/g,'')}`, PROFILE.contact.phone],
+      ['Address', '#', PROFILE.contact.location],
+      ['Github', PROFILE.contact.website, PROFILE.contact.website],
     ];
     links.forEach(([k,href,val])=>{
       const row = document.createElement('div'); row.className='chip';
@@ -410,17 +412,27 @@
     document.getElementById('intern').textContent = PROFILE.internship;
 
     // Projects + filter
-    const grid = document.getElementById('project-grid');
+    const grid  = document.getElementById('project-grid');
     const modal = document.getElementById('projectModal');
-    const mTitle = document.getElementById('mTitle');
+    const mTitle= document.getElementById('mTitle');
     const mDesc = document.getElementById('mDesc');
     const mTags = document.getElementById('mTags');
     const mLive = document.getElementById('mLive');
     const mCode = document.getElementById('mCode');
     const mMock = document.getElementById('mMock');
-    const mClose = document.getElementById('mClose');
+    const mClose= document.getElementById('mClose');
+    const mediaWrap = document.getElementById('mediaWrap');
 
-    const allTags = Array.from(new Set(PROJECTS.flatMap(p=>p.tags)));
+    // create mImg if missing (safety)
+    const mImg = document.getElementById('mImg') || (() => {
+      const img = document.createElement('img');
+      img.id = 'mImg'; img.className = 'screenshot'; img.hidden = true;
+      mediaWrap.prepend(img);
+      return img;
+    })();
+
+    // Filter buttons
+    const allTags = Array.from(new Set(PROJECTS.flatMap(p=>p.tags||[])));
     const filterBox = document.getElementById('filter');
     const filterButtons = ['ทั้งหมด', ...allTags].map(tag=>{
       const b = document.createElement('button'); b.textContent = tag; b.dataset.tag = tag; if(tag==='ทั้งหมด') b.classList.add('active');
@@ -433,32 +445,108 @@
 
     function cardTemplate(p){
       const a = document.createElement('a');
-      a.href = 'javascript:void(0)'; a.className = `tile ${p.classes||''}`;
-      a.innerHTML = `<span class="bg"></span><span class="label">${p.title} <span class="sub">${p.subtitle||''}</span></span>`;
+      const useImg = Boolean(p.thumb);
+      a.href = 'javascript:void(0)';
+      a.className = 'tile ' + (useImg ? 'hasImg' : (p.classes || ''));
+      a.innerHTML =
+        (useImg
+          ? `<img class="thumb" src="${p.thumb}" alt="${p.title} thumbnail">`
+          : `<span class="bg"></span>`)
+        + `<span class="label">${p.title} <span class="sub">${p.subtitle||''}</span></span>`;
       a.addEventListener('click', ()=> openProject(p));
       return a;
     }
 
     function render(tag){
       grid.innerHTML = '';
-      const items = PROJECTS.filter(p=> !tag || p.tags.includes(tag));
+      const items = PROJECTS.filter(p=> !tag || (p.tags||[]).includes(tag));
       items.forEach(p=> grid.append(cardTemplate(p)));
     }
     render();
 
-    function openProject(p){
-      mTitle.textContent = p.title;
-      mDesc.textContent = p.description || '';
-      mTags.innerHTML = '';
-      (p.tags||[]).forEach(t=> mTags.append(Object.assign(document.createElement('span'),{className:'chip',textContent:t})));
-      mLive.href = p.live || '#';
-      mCode.href = p.code || '#';
-      mMock.textContent = 'ภาพตัวอย่าง/สกรีนช็อต';
-      if(!modal.open) modal.showModal();
-    }
-    mClose.addEventListener('click', ()=> modal.close());
+    // --- helpers: พรีโหลดและคืน path ที่ใช้ได้ตัวแรก (ลอง ./, / และนามสกุลยอดนิยม) ---
+    // --- helpers: พรีโหลดและคืน path ที่ใช้ได้ตัวแรก (ลอง ./, /, ../, ../../ และนามสกุลยอดนิยม) ---
+    function _candidateSources(src){
+        if (/^https?:\/\//i.test(src)) return [src]; // กรณีเป็น URL ตรง
 
-    // Improve keyboard navigation
+        const hasExt = /\.\w+$/.test(src);
+        const base = hasExt ? src.slice(0, src.lastIndexOf('.')) : src;
+        const ext  = hasExt ? src.slice(src.lastIndexOf('.')) : '';
+        const exts = hasExt ? [ext, ext.toUpperCase()] :
+            ['.png','.PNG','.jpg','.JPG','.jpeg','.JPEG','.webp','.WEBP'];
+
+        // เพิ่ม '../' และ '../../' สำหรับโปรเจ็กต์ที่ HTML อยู่ในโฟลเดอร์ย่อย
+        const prefixes = ['', './', '/', '../', '../../'];
+
+        const out = [];
+        for (const pre of prefixes){
+            for (const e of exts){
+            const name = hasExt ? base + e : src + e;
+            out.push(pre + name);
+            }
+        }
+        return [...new Set(out)];
+    }
+    function preloadFirstWorking(src, cb){
+      const list = _candidateSources(src);
+      let i = 0;
+      const tryOne = () => {
+        if (i >= list.length) return cb(null);
+        const test = new Image();
+        test.onload = () => cb(list[i]);
+        test.onerror = () => { i++; tryOne(); };
+        test.src = list[i];
+      };
+      tryOne();
+    }
+
+    // ====== openProject (เหมือนเดิม แต่พรีโหลดรูปและสลับ mock ให้อัตโนมัติ) ======
+    function openProject(p){
+      // ข้อมูลหลัก
+      mTitle.textContent = p.title || '';
+      mDesc.textContent  = p.description || '';
+
+      // แท็ก
+      mTags.innerHTML = '';
+      (p.tags || []).forEach(t => {
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.textContent = t;
+        mTags.append(chip);
+      });
+
+      // ลิงก์
+      mLive.href = p.live || '#';
+      mLive.target = p.live && p.live !== '#' ? '_blank' : '';
+      mCode.href = p.code || '#';
+      mCode.target = p.code && p.code !== '#' ? '_blank' : '';
+
+      // รูป
+      const shot = p.shot || p.screenshot || p.thumb;
+      if (shot){
+        mImg.hidden = true;
+        mMock.hidden = false;
+
+        preloadFirstWorking(shot, (goodSrc) => {
+          if (goodSrc){
+            mImg.onload  = () => { mImg.hidden = false; mMock.hidden = true;  };
+            mImg.onerror = () => { mImg.hidden = true;  mMock.hidden = false; };
+            mImg.src = goodSrc;
+            mImg.alt = `${p.title || 'Project'} screenshot`;
+          } else {
+            console.warn('Image not found:', shot);
+            mImg.hidden = true; mMock.hidden = false;
+          }
+        });
+      } else {
+        mImg.hidden = true;
+        mMock.hidden = false;
+      }
+
+      if (!modal.open) modal.showModal();
+    }
+
+    mClose.addEventListener('click', ()=> modal.close());
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.open) modal.close(); });
   </script>
 </body>
