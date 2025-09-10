@@ -154,6 +154,10 @@
     .btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
     .btn.primary:hover{ filter:brightness(.96) }
     button.btn{ font:inherit; color:inherit; background:inherit }
+
+    /* ensure image stays on top of mock if both visible for a moment */
+    .media-wrap > img.screenshot { z-index: 2; }
+    .media-wrap > .mock { z-index: 1; }
   </style>
 </head>
 <body>
@@ -180,7 +184,7 @@
     <section id="home">
       <div class="hero">
         <h1>A tiny portfolio on the internet</h1>
-        <p class="muted">สไตล์คล้าย Neal.fun — แต่เป็นพื้นที่ของฉัน ✨</p>
+        <p class="muted">Welcome to — my portfolio ✨</p>
       </div>
 
       <!-- Quick tiles -->
@@ -247,7 +251,7 @@
   </main>
 
   <footer>
-    <div class="wrap">© <span id="year"></span> Pleng — Built with ♥ in a Neal.fun vibe.</div>
+    <div class="wrap">© <span id="year"></span> Dream — Built with ♥ in a Neal.fun vibe.</div>
   </footer>
 
   <!-- MODAL -->
@@ -280,13 +284,12 @@
     /* ===================== CONFIG ===================== */
     const PROFILE = {
       name: 'Patiphat Boonanan (Dream)',
-      title: '4th-year IT @ KMUTNB (Prachinburi) — Front-End / Full-Stack Intern',
+      title: '4th-year IT @ KMUTNB (Prachinburi) — Front-End / Full-Stack / UX/UI Intern',
       avatarEmoji: '🧑🏻\u200d💻',
       bio: [
-        'ชอบทำเว็บที่ใช้ง่าย ดูสะอาด มีลูกเล่นเล็ก ๆ ที่ให้ความสุขแบบ *Spark Joy*',
-        'กำลังสร้างแบรนด์ **Lumera** (Art Space & Photobooth vibes) และฝึกทำโปรเจกต์สาย Front-End/Full-Stack เพื่อยื่นฝึกงาน.'
+        'สวัสดีครับ ผม "ดรีม" (ปฏิพัทธ์) — ชอบออกแบบเว็บที่เรียบง่ายแต่มีชีวิต ชอบเก็บรายละเอียด UX ตั้งแต่โหลดหน้าไปจนถึงความรู้สึกของปุ่มคลิก ถนัด HTML/CSS/JavaScript, Node.js/SQLite และกำลังต่อยอด React; สนใจ UX/UI และ micro-animations ที่ทำให้ผู้ใช้ยิ้มได้',
       ],
-      internship: 'สนใจฝึกงานตำแหน่ง Front-End / Full-Stack | พ.ย. 2025 – ก.พ. 2026 | กรุงเทพฯ และปริมณฑล',
+      internship: 'สนใจฝึกงานตำแหน่ง Front-End / Full-Stack | เริ่มฝึกงานวันที่ 3 พ.ย. 2025 – 27 ก.พ. 2026 (4 เดือน) | กรุงเทพฯ และปริมณฑล',
       chips: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'Node.js', 'SQLite'],
       skills: ['React (เบื้องต้น)', 'Tailwind', 'Vanilla JS', 'Git & GitHub', 'REST API Basics', 'Responsive Design'],
       interests: ['Photobooth & Gacha UX', 'Minimal / Gen-Z Aesthetics', 'Interactive Web', 'Micro-animations'],
@@ -310,7 +313,7 @@
         shot:  'images/memory_card_game.png',
         description: 'เกมจับคู่การ์ดพร้อมแอนิเมชัน เขียนด้วย Vanilla JS รองรับระดับความยาก และมีโมดัลสรุปคะแนน',
         code: 'https://github.com/overyou2003',
-        live: '#',
+        live: 'https://mini-project-memory-card-game.vercel.app/',
       },
       {
         title: 'Debate App — Front-End',
@@ -466,39 +469,47 @@
 
     // --- helpers: พรีโหลดและคืน path ที่ใช้ได้ตัวแรก (ลอง ./, / และนามสกุลยอดนิยม) ---
     // --- helpers: พรีโหลดและคืน path ที่ใช้ได้ตัวแรก (ลอง ./, /, ../, ../../ และนามสกุลยอดนิยม) ---
+    // ลองหลายพาธและนามสกุลยอดนิยม
     function _candidateSources(src){
-        if (/^https?:\/\//i.test(src)) return [src]; // กรณีเป็น URL ตรง
+    if (/^https?:\/\//i.test(src)) return [src]; // URL ตรง
 
-        const hasExt = /\.\w+$/.test(src);
-        const base = hasExt ? src.slice(0, src.lastIndexOf('.')) : src;
-        const ext  = hasExt ? src.slice(src.lastIndexOf('.')) : '';
-        const exts = hasExt ? [ext, ext.toUpperCase()] :
-            ['.png','.PNG','.jpg','.JPG','.jpeg','.JPEG','.webp','.WEBP'];
+    const hasExt = /\.\w+$/.test(src);
+    const base = hasExt ? src.slice(0, src.lastIndexOf('.')) : src;
+    const ext  = hasExt ? src.slice(src.lastIndexOf('.')) : '';
+    const exts = hasExt ? [ext, ext.toUpperCase()]
+                        : ['.png','.PNG','.jpg','.JPG','.jpeg','.JPEG','.webp','.WEBP'];
 
-        // เพิ่ม '../' และ '../../' สำหรับโปรเจ็กต์ที่ HTML อยู่ในโฟลเดอร์ย่อย
-        const prefixes = ['', './', '/', '../', '../../'];
+    // เผื่อกรณี HTML อยู่ในโฟลเดอร์ย่อย หรือ host ใต้ subpath (เช่น GitHub Pages)
+    const prefixes = ['', './', '/', '../', '../../'];
 
-        const out = [];
-        for (const pre of prefixes){
-            for (const e of exts){
-            const name = hasExt ? base + e : src + e;
-            out.push(pre + name);
-            }
+    const out = [];
+    for (const pre of prefixes){
+        for (const e of exts){
+        const name = hasExt ? base + e : src + e;
+        out.push(pre + name);
         }
-        return [...new Set(out)];
     }
+    return [...new Set(out)];
+    }
+
+    // พรีโหลด + log ให้เห็นพาธที่ลอง
     function preloadFirstWorking(src, cb){
-      const list = _candidateSources(src);
-      let i = 0;
-      const tryOne = () => {
-        if (i >= list.length) return cb(null);
-        const test = new Image();
-        test.onload = () => cb(list[i]);
-        test.onerror = () => { i++; tryOne(); };
-        test.src = list[i];
-      };
-      tryOne();
-    }
+    const list = _candidateSources(src);
+    let i = 0;
+    const tryOne = () => {
+        if (i >= list.length) {
+        console.warn('⛔️ รูปไม่พบจากทุกพาธที่ลอง:', src, list);
+        return cb(null);
+        }
+        const url = list[i];
+        const img = new Image();
+        img.onload  = () => { console.info('✅ ใช้พาธนี้ได้:', url); cb(url); };
+        img.onerror = () => { console.warn('❌ ไม่พบรูป:', url); i++; tryOne(); };
+        img.src = url;
+    };
+    tryOne();
+}
+
 
     // ====== openProject (เหมือนเดิม แต่พรีโหลดรูปและสลับ mock ให้อัตโนมัติ) ======
     function openProject(p){
