@@ -1,11 +1,460 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DREAMS — Portfolio</title>
+  <meta name="description" content="Portfolio ของ Pleng — Front‑End / Full‑Stack Intern. โชว์โปรเจกต์, เรซูเม่, และช่องทางติดต่อ ในสไตล์ Neal.fun"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Theme (light by default) */
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted:#64748b;
+      --primary: #111827; /* heading สีเข้มคล้าย Neal */
+      --accent: #2563eb;
+      --border: #e5e7eb;
+      --shadow: 0 14px 36px rgba(0,0,0,.10);
+      --radius: 18px;
+      --bg-grad: radial-gradient(1300px 620px at 50% -240px, #fff 42%, #eef2ff 100%);
+    }
+    .dark{
+      --bg:#0b1220; --surface:#0f172a; --text:#e5e7eb; --muted:#94a3b8; --primary:#f8fafc; --border:#1f2937; --shadow:0 14px 36px rgba(0,0,0,.45);
+      --bg-grad: radial-gradient(1300px 620px at 50% -240px, #0b1220 42%, #0a1130 100%);
+    }
+    
+    *{ box-sizing:border-box }
+    html,body{
+      margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, Noto Sans;
+      background: var(--bg-grad);
+      background-color: var(--bg);
+      color:var(--text);
+      min-height:100dvh;
+      display:flex; flex-direction:column;
+    }
+    body{
+      margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, Noto Sans;
+      background: radial-gradient(1300px 620px at 50% -240px, #fff 42%, #eef2ff 100%);
+      color:var(--text);
+      min-height:100dvh;
+      display:flex; flex-direction:column;
+    }
+    header.site{
+      position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(6px);
+      background: color-mix(in oklab, var(--surface) 60%, transparent);
+      border-bottom:1px solid var(--border); 
+    }
+    .wrap{ width:min(1200px, 100%); margin-inline:auto; padding:14px 18px }
+    .bar{ display:flex; align-items:center; justify-content:space-between; gap:16px }
+    .brand{ font-weight:900; letter-spacing:.12em; font-size:22px }
+    nav a{ color:var(--muted); text-decoration:none; font-weight:700; padding:10px 12px; border-radius:12px; display:inline-block }
+    nav a.active, nav a:hover{ color:var(--primary); background:rgba(0,0,0,.04) }
+    .cta{ display:flex; align-items:center; gap:8px }
+    .switch{ display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--muted) }
+    .switch input{ appearance:none; width:40px; height:24px; background:#cbd5e1; border-radius:999px; position:relative; outline:none; cursor:pointer }
+    .switch input::after{ content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; transition:transform .2s ease }
+    .switch input:checked{ background:#334155 }
+    .switch input:checked::after{ transform:translateX(16px) }
+
+    /* HERO */
+    .hero{ text-align:center; padding:60px 18px 26px }
+    .hero h1{ margin:0; font-size:clamp(36px, 6vw, 56px); font-weight:900; letter-spacing:.08em }
+    .hero p{ color:var(--muted); margin:8px 0 0 }
+
+    /* TILES (Neal.fun style) */
+    .tiles{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:26px }
+    @media (max-width: 900px){ .tiles{ grid-template-columns:repeat(2,1fr) } }
+    @media (max-width: 560px){ .tiles{ grid-template-columns:1fr } }
+    .tile{ position:relative; isolation:isolate; min-height:130px; aspect-ratio: 2.35/1; border-radius:16px; overflow:hidden; background:#f1f5f9; border:1px solid var(--border); text-decoration:none; color:inherit; display:flex; align-items:center; justify-content:center; text-align:center; transition:transform .18s ease, box-shadow .18s ease }
+    .tile:hover{ transform:translateY(-3px); box-shadow:var(--shadow) }
+    .tile:active{ transform:none }
+    .tile .label{ position:relative; z-index:2; padding:10px 16px; font-weight:800; font-size:clamp(16px,2vw,22px) }
+    .tile .sub{ display:block; font-weight:600; font-size:clamp(12px,1.4vw,14px); opacity:.95 }
+    .bg{ position:absolute; inset:0; z-index:1 }
+
+    /* Section blocks */
+    section{ padding:10px 0 60px }
+    section h2{ margin:36px 0 10px; font-size:clamp(24px,3.4vw,32px) }
+    .muted{ color:var(--muted) }
+
+    /* ABOUT card */
+    .about{ display:grid; grid-template-columns: 220px 1fr; gap:24px; background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:20px; box-shadow:var(--shadow) }
+    @media (max-width:720px){ .about{ grid-template-columns:1fr } }
+    .avatar{ width:200px; aspect-ratio:1/1; border-radius:20px; background:linear-gradient(135deg,#dbeafe,#fee2e2); border:1px solid var(--border); display:grid; place-items:center; font-size:48px }
+    .chip{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:color-mix(in oklab, var(--surface) 75%, transparent); font-size:13px }
+    .stack{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px }
+
+    /* PROJECTS */
+    .filter{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 18px }
+    .filter button{ border:1px solid var(--border); background:var(--surface); padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:700; color:var(--muted) }
+    .filter button.active, .filter button:hover{ color:var(--primary); background:rgba(0,0,0,.04) }
+
+    /* Project modal */
+    dialog{ width:min(900px,96vw); border:none; border-radius:20px; padding:0; overflow:hidden; box-shadow:var(--shadow); background:var(--surface) }
+    dialog::backdrop{ background:rgba(2,6,23,.55) }
+    .modal-head{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border) }
+    .modal-body{ padding:18px; display:grid; grid-template-columns: 1.1fr 1fr; gap:16px }
+    @media (max-width: 720px){ .modal-body{ grid-template-columns:1fr } }
+    .mock{ border:1px dashed var(--border); border-radius:14px; aspect-ratio:16/10; display:grid; place-items:center; background:repeating-linear-gradient(45deg,#f1f5f9, #f1f5f9 10px, #e2e8f0 10px, #e2e8f0 20px) }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap }
+    .btn{ border:1px solid var(--border); background:var(--surface); padding:10px 14px; border-radius:12px; text-decoration:none; color:inherit; font-weight:700 }
+    .btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff }
+
+    /* CONTACT */
+    .contact{ display:grid; grid-template-columns:1fr 1fr; gap:18px }
+    @media (max-width:720px){ .contact{ grid-template-columns:1fr } }
+    .card{ background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:var(--shadow) }
+    .list{ display:grid; gap:10px; margin:10px 0 }
+    .list a{ text-decoration:none; color:var(--primary) }
+
+    footer{ margin-top:auto; border-top:1px solid var(--border); padding:18px 0; color:var(--muted) }
+
+    /* Fancy backgrounds for the first 9 tiles to match Neal vibe */
+    .t1 .bg{ background: radial-gradient(70px 20px at 16% 76%, #e7d9bd 0 95%, transparent 95%), radial-gradient(180px 40px at 84% 22%, #e7d9bd 0 95%, transparent 95%), linear-gradient(#f6ead2, #fbf7ef) }
+    .t2{ color:#f9fafb; } .t2 .bg{ background:radial-gradient(260px 260px at 54% 52%, rgba(28,188,80,.95) 0 34%, transparent 35%), radial-gradient(260px 260px at 52% 52%, #0000 0 36%, rgba(255,184,0,.9) 36% 39%, #0000 40%), repeating-linear-gradient(120deg, #1c1c1c 0 14px, #111 14px 28px) }
+    .t3 .bg{ background: radial-gradient(80px 80px at 22% 38%, #9ad0ff 0 72%, transparent 73%), radial-gradient(40px 40px at 30% 46%, #2d9fff 0 72%, transparent 73%), radial-gradient(20px 20px at 72% 28%, #ff6a3d 0 70%, transparent 71%), linear-gradient(#ffffff, #eaf2ff) }
+    .t4 .bg{ background: repeating-linear-gradient(0deg, #ffd34a 0 10px, #ffd34a 10px 20px, #1f2937 20px 22px, transparent 22px 24px), linear-gradient(#fff8dd,#fff3c6) }
+    .t5 .bg{ background: radial-gradient(120px 120px at 14% 54%, #e8eaee 0 64%, transparent 65%), radial-gradient(12px 60px at 22% 60%, #c7c9cf 0 60%, transparent 61%), linear-gradient(#ffffff,#eef0f4) }
+    .t6 .bg{ background: radial-gradient(30px 30px at 16% 70%, #1f2937 0 65%, transparent 66%), linear-gradient(#f6f8ff,#e5ecff) }
+    .t7{ color:#fff } .t7 .bg{ background: linear-gradient(#0e1320,#111827) }
+    .t8 .bg{ background: radial-gradient(18px 18px at 30% 35%, #9cc7ff 0 70%, transparent 71%), radial-gradient(18px 18px at 40% 55%, #c6ddff 0 70%, transparent 71%), radial-gradient(18px 18px at 58% 42%, #c6ddff 0 70%, transparent 71%), linear-gradient(#ffffff,#eef6ff) }
+    .t9{ color:#fffbeb } .t9 .bg{ background: repeating-linear-gradient(0deg, transparent 0 14px, rgba(255,255,255,.06) 14px 28px), linear-gradient(#1a2f85,#0b1e66) }
+  </style>
 </head>
 <body>
-    
+  <header class="site">
+    <div class="wrap bar">
+      <div class="brand">LUCID.DREAM</div>
+      <nav aria-label="Main">
+        <a href="#home" data-nav class="active">Home</a>
+        <a href="#projects" data-nav>Projects</a>
+        <a href="#about" data-nav>Personal info</a>
+        <a href="#contact" data-nav>Contact</a>
+      </nav>
+      <div class="cta">
+        <label class="switch" title="Toggle dark mode">
+          <input id="mode" type="checkbox" aria-label="Dark mode toggle"/>
+          <span>Dark</span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section id="home">
+      <div class="hero">
+        <h1>A tiny portfolio on the internet</h1>
+        <p class="muted">สไตล์คล้าย Neal.fun — แต่เป็นพื้นที่ของฉัน ✨</p>
+      </div>
+      
+      <!-- Quick tiles to key sections / featured works -->
+      <div class="tiles" id="featured">
+        <a class="tile t1" href="#projects" aria-label="ดูโปรเจกต์ทั้งหมด">
+          <span class="bg" aria-hidden="true"></span>
+          <span class="label">ดูโปรเจกต์ <span class="sub">(งานจริง + ฝึกทำ)</span></span>
+        </a>
+        <a class="tile t2" href="#about" aria-label="อ่านประวัติและเป้าหมาย">
+          <span class="bg" aria-hidden="true"></span>
+          <span class="label">About Me <span class="sub">เป้าหมาย & ทักษะ</span></span>
+        </a>
+        <a class="tile t3" href="#contact" aria-label="ช่องทางติดต่อ">
+          <span class="bg" aria-hidden="true"></span>
+          <span class="label">Contact <span class="sub">อีเมล / โทร / ลิงก์</span></span>
+        </a>
+        <a class="tile t4" href="#projects" aria-label="Memory Card Game">
+          <span class="bg"></span>
+          <span class="label">Memory Card Game <span class="sub">HTML / CSS / JS</span></span>
+        </a>
+        <a class="tile t5" href="#projects" aria-label="Debate App (FE/BE)">
+          <span class="bg"></span>
+          <span class="label">Debate App <span class="sub">Front‑End + Node/SQLite</span></span>
+        </a>
+        <a class="tile t6" href="#projects" aria-label="To‑Do & UI Components">
+          <span class="bg"></span>
+          <span class="label">To‑Do & UI Lab <span class="sub">Components Playground</span></span>
+        </a>
+        <a class="tile t7" href="#projects" aria-label="Gacha / Photobooth Idea">
+          <span class="bg"></span>
+          <span class="label">Gacha/Photobooth <span class="sub">Spark Joy Experiments</span></span>
+        </a>
+        <a class="tile t8" href="#about" aria-label="ตำแหน่งฝึกงานที่ต้องการ">
+          <span class="bg"></span>
+          <span class="label">Internship <span class="sub">Front‑End / Full‑Stack</span></span>
+        </a>
+        <a class="tile t9" href="#contact" aria-label="Resume & Download">
+          <span class="bg"></span>
+          <span class="label">Resume <span class="sub">ดาวน์โหลด PDF</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" hidden>
+      <h2>โปรเจกต์</h2>
+      <p class="muted">เลือกรายการด้านล่างเพื่อดูรายละเอียด ตัวอย่างนี้ดึงจากอาร์เรย์ <code>PROJECTS</code> — แก้ไขได้ง่าย</p>
+      <div class="filter" id="filter"></div>
+      <div class="tiles" id="project-grid"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" hidden>
+      <h2>ประวัติส่วนตัว</h2>
+      <div class="about">
+        <div class="avatar" id="avatar" aria-label="รูปโปรไฟล์">🧑🏻‍💻</div>
+        <div>
+          <h3 id="name">ชื่อ‑นามสกุล</h3>
+          <p id="tagline" class="muted">ตำแหน่ง/สเตตัส</p>
+          <div class="stack" id="chips"></div>
+          <hr style="border:none;border-top:1px solid var(--border); margin:14px 0">
+          <div id="bio"></div>
+          <h4 style="margin-top:18px">ทักษะหลัก</h4>
+          <div class="stack" id="skills"></div>
+          <h4 style="margin-top:18px">ความสนใจ</h4>
+          <div class="stack" id="interests"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" hidden>
+      <h2>ติดต่อ</h2>
+      <div class="contact">
+        <div class="card">
+          <h3>Reach me</h3>
+          <div class="list" id="reach"></div>
+          <div class="actions">
+            <a class="btn primary" id="cvBtn" href="#" download>ดาวน์โหลด CV</a>
+            <a class="btn" id="githubBtn" href="#" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" id="linkedinBtn" href="#" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>สถานะฝึกงาน</h3>
+          <p id="intern"></p>
+          <p class="muted">ถ้าตารางเวลา/พื้นที่เหมาะสม ติดต่อมาได้เลย 🙌</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Pleng — Built with ♥ in a Neal.fun vibe.</div>
+  </footer>
+
+  <!-- MODAL -->
+  <dialog id="projectModal" aria-label="Project detail">
+    <div class="modal-head">
+      <strong id="mTitle">Project</strong>
+      <button class="btn" id="mClose">ปิด</button>
+    </div>
+    <div class="modal-body">
+      <div class="mock" id="mMock">ภาพตัวอย่าง/สกรีนช็อต</div>
+      <div>
+        <p id="mDesc" class="muted"></p>
+        <div class="stack" id="mTags"></div>
+        <div class="actions" style="margin-top:14px">
+          <a class="btn primary" id="mLive" href="#" target="_blank" rel="noopener">ดูเดโม</a>
+          <a class="btn" id="mCode" href="#" target="_blank" rel="noopener">ดูโค้ด</a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    /* ===================== CONFIG (แก้ไขได้) ===================== */
+    const PROFILE = {
+      name: 'Thanthiti (Pleng)',
+      title: '4th-year IT @ KMUTNB (Prachinburi) — Front‑End / Full‑Stack Intern',
+      avatarEmoji: '🧑🏻\u200d💻',
+      bio: [
+        'ชอบทำเว็บที่ใช้ง่าย ดูสะอาด มีลูกเล่นเล็ก ๆ ที่ให้ความสุขแบบ *Spark Joy*',
+        'กำลังสร้างแบรนด์ **Lumera** (Art Space & Photobooth vibes) และฝึกทำโปรเจกต์สาย Front‑End/Full‑Stack เพื่อยื่นฝึกงาน.'
+      ],
+      internship: 'สนใจฝึกงานตำแหน่ง Front‑End / Full‑Stack | พ.ย. 2025 – ก.พ. 2026 | กรุงเทพฯ และปริมณฑล',
+      chips: ['HTML', 'CSS', 'JavaScript', 'UI/UX', 'Node.js', 'SQLite'],
+      skills: ['React (เบื้องต้น)', 'Tailwind', 'Vanilla JS', 'Git & GitHub', 'REST API Basics', 'Responsive Design'],
+      interests: ['Photobooth & Gacha UX', 'Minimal / Gen‑Z Aesthetics', 'Interactive Web', 'Micro‑animations'],
+      contact: {
+        email: 'thanthiti.pinmolee@gmail.com',
+        phone: '094-525-5469',
+        location: 'Bangkok Metro, TH',
+        website: 'https://github.com/overyou2003',
+        linkedin: 'https://www.linkedin.com/',
+        github: 'https://github.com/overyou2003',
+        cv: '#', // ใส่ลิงก์ไฟล์ PDF ได้
+      }
+    };
+
+    const PROJECTS = [
+      {
+        title: 'Memory Card Game',
+        subtitle: 'HTML / CSS / JS',
+        classes: 't4',
+        tags: ['Game', 'DOM', 'Animation'],
+        description: 'เกมจับคู่การ์ดพร้อมแอนิเมชัน เขียนด้วย Vanilla JS รองรับระดับความยาก และมีโมดัลสรุปคะแนน',
+        code: 'https://github.com/overyou2003',
+        live: '#',
+      },
+      {
+        title: 'Debate App — Front‑End',
+        subtitle: 'Vite / React (หรือ Vanilla) UI',
+        classes: 't5',
+        tags: ['SPA', 'Routing', 'State'],
+        description: 'ส่วนติดต่อผู้ใช้สำหรับแอปถกเถียง มีระบบห้อง โพสต์ และคะแนนโหวต',
+        code: 'https://github.com/overyou2003/Debate_FrontEnd',
+        live: '#',
+      },
+      {
+        title: 'Debate API — Back‑End',
+        subtitle: 'Node.js + SQLite',
+        classes: 't3',
+        tags: ['API', 'Auth (basic)', 'DB'],
+        description: 'แบ็กเอนด์ API สำหรับแอป Debate: จัดการผู้ใช้ โพสต์ และคอมเมนต์ด้วย SQLite',
+        code: 'https://github.com/overyou2003/Debate_BackEnd',
+        live: '#',
+      },
+      {
+        title: 'To‑Do & UI Components',
+        subtitle: 'Vanilla Components',
+        classes: 't6',
+        tags: ['Components', 'Accessibility'],
+        description: 'ลิสต์งาน + คอลเลกชันคอมโพเนนต์ UI (Modal, Tabs, Tooltip) ที่เขียนเอง',
+        code: 'https://github.com/overyou2003',
+        live: '#',
+      },
+      {
+        title: 'Lumera — Spark Joy Mock',
+        subtitle: 'Gacha / Photobooth',
+        classes: 't7',
+        tags: ['Brand', 'Motion', 'Marketing'],
+        description: 'เพลย์กราวด์แนว Photobooth + กาชาปอง ใช้เสริมคอนเทนต์ Art Space',
+        code: 'https://github.com/overyou2003',
+        live: '#',
+      },
+      {
+        title: 'CSS Micro‑animations',
+        subtitle: 'Hover & Ripple',
+        classes: 't2',
+        tags: ['CSS', 'Performance'],
+        description: 'รวมเทคนิค hover, ripple, และ transition ที่เรียบง่ายแต่ดูแพง',
+        code: 'https://github.com/overyou2003',
+        live: '#',
+      },
+    ];
+
+    /* ===================== RUNTIME ===================== */
+    const yearEl = document.getElementById('year');
+    yearEl.textContent = new Date().getFullYear();
+
+    // SPA nav
+    const sections = Array.from(document.querySelectorAll('main section'));
+    const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+    function show(hash){
+      const id = (hash || '#home').replace('#','');
+      sections.forEach(s => s.hidden = s.id !== id);
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.addEventListener('hashchange', ()=> show(location.hash));
+    show(location.hash);
+
+    // Mode toggle
+    const mode = document.getElementById('mode');
+    const saved = localStorage.getItem('mode');
+    if(saved){ mode.checked = saved === 'dark'; }
+    else if(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches){ mode.checked = true; }
+    function applyMode(){
+      document.documentElement.classList.toggle('dark', mode.checked);
+      localStorage.setItem('mode', mode.checked ? 'dark' : 'light');
+    }
+    applyMode();
+    mode.addEventListener('change', applyMode);
+
+    // Fill ABOUT
+    document.getElementById('name').textContent = PROFILE.name;
+    document.getElementById('tagline').textContent = PROFILE.title;
+    const av = document.getElementById('avatar'); av.textContent = PROFILE.avatarEmoji || '👤';
+    const chips = document.getElementById('chips');
+    PROFILE.chips.forEach(c=>{ const el = Object.assign(document.createElement('span'),{className:'chip',textContent:c}); chips.append(el); });
+    const bio = document.getElementById('bio');
+    PROFILE.bio.forEach(line=>{ const p = document.createElement('p'); p.innerHTML = line; bio.append(p); });
+    const skills = document.getElementById('skills'); PROFILE.skills.forEach(s=> skills.append(Object.assign(document.createElement('span'),{className:'chip',textContent:s})));
+    const interests = document.getElementById('interests'); PROFILE.interests.forEach(s=> interests.append(Object.assign(document.createElement('span'),{className:'chip',textContent:s})));
+
+    // Contact
+    const reach = document.getElementById('reach');
+    const links = [
+      ['อีเมล', `mailto:${PROFILE.contact.email}`, PROFILE.contact.email],
+      ['โทร', `tel:${PROFILE.contact.phone.replace(/[^\d+]/g,'')}`, PROFILE.contact.phone],
+      ['ที่อยู่', '#', PROFILE.contact.location],
+      ['เว็บไซต์', PROFILE.contact.website, PROFILE.contact.website],
+    ];
+    links.forEach(([k,href,val])=>{
+      const row = document.createElement('div'); row.className='chip';
+      const a = document.createElement('a'); a.href = href; a.textContent = val; a.target = href.startsWith('http') ? '_blank' : '';
+      row.innerHTML = `<strong>${k}:</strong> `; row.append(a); reach.append(row);
+    });
+    document.getElementById('cvBtn').href = PROFILE.contact.cv || '#';
+    document.getElementById('githubBtn').href = PROFILE.contact.github || '#';
+    document.getElementById('linkedinBtn').href = PROFILE.contact.linkedin || '#';
+    document.getElementById('intern').textContent = PROFILE.internship;
+
+    // Projects + filter
+    const grid = document.getElementById('project-grid');
+    const modal = document.getElementById('projectModal');
+    const mTitle = document.getElementById('mTitle');
+    const mDesc = document.getElementById('mDesc');
+    const mTags = document.getElementById('mTags');
+    const mLive = document.getElementById('mLive');
+    const mCode = document.getElementById('mCode');
+    const mMock = document.getElementById('mMock');
+    const mClose = document.getElementById('mClose');
+
+    const allTags = Array.from(new Set(PROJECTS.flatMap(p=>p.tags)));
+    const filterBox = document.getElementById('filter');
+    const filterButtons = ['ทั้งหมด', ...allTags].map(tag=>{
+      const b = document.createElement('button'); b.textContent = tag; b.dataset.tag = tag; if(tag==='ทั้งหมด') b.classList.add('active');
+      b.addEventListener('click',()=>{
+        filterButtons.forEach(x=>x.classList.toggle('active', x===b));
+        render(tag==='ทั้งหมด' ? null : tag);
+      });
+      filterBox.append(b); return b;
+    });
+
+    function cardTemplate(p){
+      const a = document.createElement('a');
+      a.href = 'javascript:void(0)'; a.className = `tile ${p.classes||''}`;
+      a.innerHTML = `<span class="bg"></span><span class="label">${p.title} <span class="sub">${p.subtitle||''}</span></span>`;
+      a.addEventListener('click', ()=> openProject(p));
+      return a;
+    }
+
+    function render(tag){
+      grid.innerHTML = '';
+      const items = PROJECTS.filter(p=> !tag || p.tags.includes(tag));
+      items.forEach(p=> grid.append(cardTemplate(p)));
+    }
+    render();
+
+    function openProject(p){
+      mTitle.textContent = p.title;
+      mDesc.textContent = p.description || '';
+      mTags.innerHTML = '';
+      (p.tags||[]).forEach(t=> mTags.append(Object.assign(document.createElement('span'),{className:'chip',textContent:t})));
+      mLive.href = p.live || '#';
+      mCode.href = p.code || '#';
+      mMock.textContent = 'ภาพตัวอย่าง/สกรีนช็อต';
+      if(!modal.open) modal.showModal();
+    }
+    mClose.addEventListener('click', ()=> modal.close());
+
+    // Improve keyboard navigation
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.open) modal.close(); });
+  </script>
 </body>
 </html>
