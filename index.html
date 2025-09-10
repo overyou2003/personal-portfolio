@@ -169,6 +169,25 @@
     .dark dialog .info { color: var(--text); }
     .dark dialog .actions .btn { color: var(--text); }
     .dark dialog .btn.primary { color: #fff; } /* ปุ่มหลักให้เป็นขาวอ่านง่าย */
+    /* Disabled look for buttons (ใช้ได้ทั้ง a และ button) */
+    .btn.is-disabled,
+    .btn[aria-disabled="true"]{
+      opacity: .45;
+      cursor: not-allowed;
+      pointer-events: none;   /* กันคลิก */
+      filter: grayscale(30%);
+    }
+
+    /* ให้ปุ่ม primary ดูหม่นลงแต่ยังอ่านออก */
+    .btn.primary.is-disabled,
+    .btn.primary[aria-disabled="true"]{
+      opacity: .55;
+    }
+
+    .modal-head #mTitle {
+      font-size: 20px;
+    }
+
   </style>
 </head>
 <body>
@@ -294,6 +313,7 @@
   <script>
     /* ===================== CONFIG ===================== */
     const PROFILE = {
+      avatarUrl: 'images/me.jpg', // เปลี่ยนเป็นพาธรูปหน้าจริงของคุณ
       name: 'Patiphat Boonanan (Dream)',
       title: '4th-year IT @ KMUTNB (Prachinburi) — Front-End / Full-Stack / UX/UI Intern',
       avatarEmoji: '🧑🏻\u200d💻',
@@ -326,7 +346,7 @@
         tags: ['Game', 'DOM', 'Animation'],
         thumb: 'images/memory_card_game.png',
         shot:  'images/memory_card_game.png',
-        description: 'เกมจับคู่การ์ดพร้อมแอนิเมชัน เขียนด้วย Vanilla JS รองรับระดับความยาก และมีโมดัลสรุปคะแนน',
+        description: 'เกมจับคู่การ์ดพร้อมแอนิเมชัน เขียนด้วย Vanilla JS และมีโมดัลสรุปคะแนน มีเสียงเพลงประกอบสนุกสนาน อีกทั้งยังมีเสียงซาวด์เอฟเฟคเพื่ออรรถรสในการเล่นอีกด้วย',
         code: 'https://github.com/overyou2003/miniProject-MemoryCardGame.git',
         live: 'https://mini-project-memory-card-game.vercel.app/',
       },
@@ -356,7 +376,7 @@
         tags: ['Components', 'Accessibility'],
         thumb: 'images/todo.png',
         shot:  'images/todo.png',
-        description: 'ลิสต์งาน + คอลเลกชันคอมโพเนนต์ UI (Modal, Tabs, Tooltip) ที่เขียนเอง',
+        description: 'ลิสต์งาน + คอลเลกชันคอมโพเนนต์ UI (Modal, Tabs, Tooltip) เป็นมินิโปรเจกต์เล็กๆ ที่เขียนขึ้นมาเอง',
         code: 'https://github.com/overyou2003/miniProject-ToDoList.git',
         live: 'https://mini-project-to-do-list-five.vercel.app/',
       },
@@ -551,11 +571,37 @@
         mTags.append(chip);
       });
 
-      // ลิงก์
-      mLive.href = p.live || '#';
-      mLive.target = p.live && p.live !== '#' ? '_blank' : '';
-      mCode.href = p.code || '#';
-      mCode.target = p.code && p.code !== '#' ? '_blank' : '';
+      // ลิงก์ (ทำสถานะ disable แทนการซ่อน)
+      function setBtnState(el, url){
+        // reset ก่อน
+        el.removeAttribute('href');
+        el.target = '';
+        el.rel = '';
+        el.classList.remove('is-disabled');
+        el.removeAttribute('aria-disabled');
+        el.removeAttribute('title');
+        el.style.pointerEvents = 'auto';
+
+        if (url && url !== '#') {
+          el.href = url;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+        } else {
+          el.classList.add('is-disabled');
+          el.setAttribute('aria-disabled', 'true');
+          el.setAttribute('title', 'ยังไม่มีลิงก์');
+          el.style.pointerEvents = 'none';
+        }
+      }
+
+      setBtnState(mLive, p.live);
+      setBtnState(mCode, p.code);
+
+// คอนเทนเนอร์ปุ่มให้โชว์ไว้เสมอ (ไม่ต้องซ่อน)
+const actions = mLive.closest('.actions');
+if (actions) actions.hidden = false;
+
+
 
       // รูป
       const shot = p.shot || p.screenshot || p.thumb;
